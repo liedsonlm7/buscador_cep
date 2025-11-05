@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import api from '../src/services/api';
 
 export default function App() {
   const [cep, setCep] = useState('');
+  const inputRef = useRef(null)
+
+  function limpar() {
+    setCep('');
+    inputRef.current.focus();
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -15,15 +21,22 @@ export default function App() {
           value={cep}
           onChangeText={(texto) => setCep(texto) }
           keyboardType='numeric'
+          ref={inputRef}
         />
       </View>
 
       <View style={styles.areaBtn}>
-        <TouchableOpacity style={[styles.botao, {backgroundColor: '#1d75cd'}]}>
+        <TouchableOpacity 
+          style={[styles.botao, {backgroundColor: '#1d75cd'}]}
+         
+        >
           <Text style={styles.botaoText}>Buscar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.botao, {backgroundColor: '#cd3e1d' }]}>
+        <TouchableOpacity 
+          style={[styles.botao, {backgroundColor: '#cd3e1d' }]}
+           onPress={limpar}
+          >
           <Text style={styles.botaoText}>Limpar</Text>
         </TouchableOpacity>
       </View>
