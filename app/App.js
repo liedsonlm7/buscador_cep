@@ -24,5 +24,21 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 25
+  },
+  text: {
+    marginTop: 25,
+    marginBottom: 15,
+    fontSize: 25,
+    fontWeight: 'bold'
+  },
+  input: {
+    backgroundColor: '#FFF',
+    borderWidth: 1,
+    borderColor: '#DDD',
+    borderRadius: 5,
+    width: '90%',
+    padding: 10,
+    fontSize: 18
   }
 });
