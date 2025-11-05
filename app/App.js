@@ -9,23 +9,21 @@ export default function App() {
 
 
   async function buscar() {
-    if(cep == '') {
+    if (cep == '') {
       alert('Digite um cep válido!');
       setCep('');
       return;
     }
 
-    try 
-    {
+    try {
       const response = await api.get(`/${cep}/json`);
       Keyboard.dismiss();
       setCepUser(response.data)
-    } 
-    catch (error) 
-    {
+    }
+    catch (error) {
       console.log('Erro:' + error)
     }
-    
+
   }
 
   function limpar() {
@@ -37,40 +35,43 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <View style={{ alignItems: 'center' }}>
         <Text style={styles.text}>Digite o CEP desejado</Text>
-        <TextInput 
+        <TextInput
           style={styles.input}
           placeholder='Ex: 29149575'
           value={cep}
-          onChangeText={(texto) => setCep(texto) }
+          onChangeText={(texto) => setCep(texto)}
           keyboardType='numeric'
           ref={inputRef}
         />
       </View>
 
       <View style={styles.areaBtn}>
-        <TouchableOpacity 
-          style={[styles.botao, {backgroundColor: '#1d75cd'}]}
+        <TouchableOpacity
+          style={[styles.botao, { backgroundColor: '#1d75cd' }]}
           onPress={buscar}
         >
           <Text style={styles.botaoText}>Buscar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={[styles.botao, {backgroundColor: '#cd3e1d' }]}
-           onPress={limpar}
-          >
+        <TouchableOpacity
+          style={[styles.botao, { backgroundColor: '#cd3e1d' }]}
+          onPress={limpar}
+        >
           <Text style={styles.botaoText}>Limpar</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={styles.resultado}>
-        <Text style={styles.itemText}>CEP: {cepUser.cep}</Text>
-        <Text style={styles.itemText}>Logradouro: {cepUser.logradouro}</Text>
-        <Text style={styles.itemText}>Bairro: {cepUser.bairro}</Text>
-        <Text style={styles.itemText}>Cidade: {cepUser.localidade}</Text>
-        <Text style={styles.itemText}>Estado: {cepUser.estado}</Text>
+      {cepUser && (
+        <View style={styles.resultado}>
+          <Text style={styles.itemText}>CEP: {cepUser.cep}</Text>
+          <Text style={styles.itemText}>Logradouro: {cepUser.logradouro}</Text>
+          <Text style={styles.itemText}>Bairro: {cepUser.bairro}</Text>
+          <Text style={styles.itemText}>Cidade: {cepUser.localidade}</Text>
+          <Text style={styles.itemText}>Estado: {cepUser.estado}</Text>
 
-      </View>
+        </View>
+      )}
+
 
     </SafeAreaView>
   );
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     color: '#FFF'
   },
   resultado: {
-    flex: 1, 
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
