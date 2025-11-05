@@ -17,6 +17,18 @@ export default function App() {
           keyboardType='numeric'
         />
       </View>
+
+      <View style={styles.areaBtn}>
+        <TouchableOpacity style={[styles.botao, {backgroundColor: '#1d75cd'}]}>
+          <Text style={styles.botaoText}>Buscar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.botao, {backgroundColor: '#cd3e1d' }]}>
+          <Text style={styles.botaoText}>Limpar</Text>
+        </TouchableOpacity>
+      </View>
+
+
     </SafeAreaView>
   );
 }
@@ -40,5 +52,21 @@ const styles = StyleSheet.create({
     width: '90%',
     padding: 10,
     fontSize: 18
+  },
+  areaBtn: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: 15,
+    justifyContent: 'space-around'
+  },
+  botao: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 5,
+  },
+  botaoText: {
+    fontSize: 20,
+    color: '#FFF'
   }
 });
