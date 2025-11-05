@@ -28,6 +28,14 @@ export default function App() {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.resultado}>
+        <Text style={styles.itemText}>CEP: 29149575</Text>
+        <Text style={styles.itemText}>Logradouro: Rua Bartolomeu Bueno</Text>
+        <Text style={styles.itemText}>Bairro: Rio Branco</Text>
+        <Text style={styles.itemText}>Cidade: Cariacica</Text>
+        <Text style={styles.itemText}>Estado: ES</Text>
+
+      </View>
 
     </SafeAreaView>
   );
@@ -68,5 +76,13 @@ const styles = StyleSheet.create({
   botaoText: {
     fontSize: 20,
     color: '#FFF'
+  },
+  resultado: {
+    flex: 1, 
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  itemText: {
+    fontSize: 22
   }
 });
