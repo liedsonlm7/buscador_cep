@@ -1,10 +1,32 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Keyboard } from 'react-native';
 import api from '../src/services/api';
 
 export default function App() {
   const [cep, setCep] = useState('');
   const inputRef = useRef(null)
+  const [cepUser, setCepUser] = useState(null);
+
+
+  async function buscar() {
+    if(cep == '') {
+      alert('Digite um cep válido!');
+      setCep('');
+      return;
+    }
+
+    try 
+    {
+      const response = await api.get(`/${cep}/json`);
+      Keyboard.dismiss();
+      setCepUser(response.data)
+    } 
+    catch (error) 
+    {
+      console.log('Erro:' + error)
+    }
+    
+  }
 
   function limpar() {
     setCep('');
@@ -28,7 +50,7 @@ export default function App() {
       <View style={styles.areaBtn}>
         <TouchableOpacity 
           style={[styles.botao, {backgroundColor: '#1d75cd'}]}
-         
+          onPress={buscar}
         >
           <Text style={styles.botaoText}>Buscar</Text>
         </TouchableOpacity>
@@ -42,11 +64,11 @@ export default function App() {
       </View>
 
       <View style={styles.resultado}>
-        <Text style={styles.itemText}>CEP: 29149575</Text>
-        <Text style={styles.itemText}>Logradouro: Rua Bartolomeu Bueno</Text>
-        <Text style={styles.itemText}>Bairro: Rio Branco</Text>
-        <Text style={styles.itemText}>Cidade: Cariacica</Text>
-        <Text style={styles.itemText}>Estado: ES</Text>
+        <Text style={styles.itemText}>CEP: {cepUser.cep}</Text>
+        <Text style={styles.itemText}>Logradouro: {cepUser.logradouro}</Text>
+        <Text style={styles.itemText}>Bairro: {cepUser.bairro}</Text>
+        <Text style={styles.itemText}>Cidade: {cepUser.localidade}</Text>
+        <Text style={styles.itemText}>Estado: {cepUser.estado}</Text>
 
       </View>
 
